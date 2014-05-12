@@ -1,0 +1,67 @@
+PREFIX /tmp/test-delocate
+
+Building liblib v1
+
+cc -DV=1 -c liblib/liblib.c -o liblib/liblib.o
+cc -dynamiclib -install_name /tmp/test-delocate/lib/liblib.1.0.0.dylib -current_version 1.0.0 -compatibility_version 1.2.3 -o liblib/liblib.1.0.0.dylib liblib/liblib.o
+rm -f liblib/liblib.dylib
+ln -s liblib.1.0.0.dylib liblib/liblib.dylib
+cp liblib/liblib.1.0.0.dylib /tmp/test-delocate/lib/liblib.1.0.0.dylib
+rm -f /tmp/test-delocate/lib/liblib.dylib
+ln -s liblib.1.0.0.dylib /tmp/test-delocate/lib/liblib.dylib
+cp liblib/liblib.h /tmp/test-delocate/include/liblib.h
+
+Building pylib v1
+
+running build
+running build_py
+creating build
+creating build/lib.macosx-10.9-intel-2.7
+creating build/lib.macosx-10.9-intel-2.7/pylib
+copying pylib/__init__.py -> build/lib.macosx-10.9-intel-2.7/pylib
+running build_ext
+skipping 'pylib/liblib.c' Cython extension (up-to-date)
+building 'pylib.liblib' extension
+creating build/temp.macosx-10.9-intel-2.7
+creating build/temp.macosx-10.9-intel-2.7/pylib
+cc -DNDEBUG -g -fwrapv -Os -Wall -Wstrict-prototypes -I/tmp/test-delocate/include -L/tmp/test-delocate/lib -arch x86_64 -arch i386 -pipe -I/System/Library/Frameworks/Python.framework/Versions/2.7/include/python2.7 -c pylib/liblib.c -o build/temp.macosx-10.9-intel-2.7/pylib/liblib.o
+cc -bundle -undefined dynamic_lookup -arch x86_64 -arch i386 -Wl,-F. -I/tmp/test-delocate/include -L/tmp/test-delocate/lib build/temp.macosx-10.9-intel-2.7/pylib/liblib.o -llib -o build/lib.macosx-10.9-intel-2.7/pylib/liblib.so
+
+listdeps pylib v1
+
+/private/tmp/test-delocate/lib/liblib.1.0.0.dylib
+
+Building liblib v2
+
+cc -DV=2 -c liblib/liblib.c -o liblib/liblib.o
+cc -dynamiclib -install_name /tmp/test-delocate/lib/liblib.2.0.0.dylib -current_version 2.0.0 -compatibility_version 1.2.3 -o liblib/liblib.2.0.0.dylib liblib/liblib.o
+rm -f liblib/liblib.dylib
+ln -s liblib.2.0.0.dylib liblib/liblib.dylib
+cp liblib/liblib.2.0.0.dylib /tmp/test-delocate/lib/liblib.2.0.0.dylib
+rm -f /tmp/test-delocate/lib/liblib.dylib
+ln -s liblib.2.0.0.dylib /tmp/test-delocate/lib/liblib.dylib
+cp liblib/liblib.h /tmp/test-delocate/include/liblib.h
+
+Building pylib v2
+
+running build
+running build_py
+creating build
+creating build/lib.macosx-10.9-intel-2.7
+creating build/lib.macosx-10.9-intel-2.7/pylib2
+copying pylib/__init__.py -> build/lib.macosx-10.9-intel-2.7/pylib2
+running build_ext
+skipping 'pylib/liblib.c' Cython extension (up-to-date)
+building 'pylib2.liblib' extension
+creating build/temp.macosx-10.9-intel-2.7
+creating build/temp.macosx-10.9-intel-2.7/pylib
+cc -DNDEBUG -g -fwrapv -Os -Wall -Wstrict-prototypes -I/tmp/test-delocate/include -L/tmp/test-delocate/lib -arch x86_64 -arch i386 -pipe -I/System/Library/Frameworks/Python.framework/Versions/2.7/include/python2.7 -c pylib/liblib.c -o build/temp.macosx-10.9-intel-2.7/pylib/liblib.o
+cc -bundle -undefined dynamic_lookup -arch x86_64 -arch i386 -Wl,-F. -I/tmp/test-delocate/include -L/tmp/test-delocate/lib build/temp.macosx-10.9-intel-2.7/pylib/liblib.o -llib -o build/lib.macosx-10.9-intel-2.7/pylib2/liblib.so
+
+listdeps pylib v2
+
+/private/tmp/test-delocate/lib/liblib.2.0.0.dylib
+liblib.1.0.0.dylib
+liblib.2.0.0.dylib
+liblib.dylib
+python2.7

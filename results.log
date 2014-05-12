@@ -1,0 +1,156 @@
+
+-----------------------------------------
+name_match-compat_differ-lib
+
+otool -L /tmp/test-delocate/lib/python2.7/site-packages/pylib/liblib.so
+	/tmp/test-delocate/lib/liblib.dylib (compatibility version 1.0.0, current version 1.0.0)
+otool -L /tmp/test-delocate/lib/python2.7/site-packages/pylib2/liblib.so
+	/tmp/test-delocate/lib/liblib.dylib (compatibility version 2.0.0, current version 2.0.0)
+import pylib....ok
+import pylib2...ok
+pylib.version  2
+pylib2.version 2
+static variables shared
+
+-----------------------------------------
+name_match-compat_differ-delocate
+
+otool -L /tmp/test-delocate/lib/python2.7/site-packages/pylib/liblib.so
+	@loader_path/.dylibs/liblib.1.0.0.dylib (compatibility version 1.0.0, current version 1.0.0)
+otool -L /tmp/test-delocate/lib/python2.7/site-packages/pylib2/liblib.so
+	@loader_path/.dylibs/liblib.2.0.0.dylib (compatibility version 2.0.0, current version 2.0.0)
+import pylib....ok
+import pylib2...failed
+dlopen(/tmp/test-delocate/lib/python2.7/site-packages/pylib2/liblib.so, 2): Library not loaded: @loader_path/.dylibs/liblib.2.0.0.dylib
+  Referenced from: /tmp/test-delocate/lib/python2.7/site-packages/pylib2/liblib.so
+  Reason: Incompatible library version: liblib.so requires version 2.0.0 or later, but liblib.1.0.0.dylib provides version 1.0.0
+
+-----------------------------------------
+name_match-compat_differ-delocate+lib
+
+otool -L /tmp/test-delocate/lib/python2.7/site-packages/pylib/liblib.so
+	@loader_path/.dylibs/liblib.1.0.0.dylib (compatibility version 1.0.0, current version 1.0.0)
+otool -L /tmp/test-delocate/lib/python2.7/site-packages/pylib2/liblib.so
+	/tmp/test-delocate/lib/liblib.dylib (compatibility version 2.0.0, current version 2.0.0)
+import pylib....ok
+import pylib2...failed
+dlopen(/tmp/test-delocate/lib/python2.7/site-packages/pylib2/liblib.so, 2): Library not loaded: /tmp/test-delocate/lib/liblib.dylib
+  Referenced from: /tmp/test-delocate/lib/python2.7/site-packages/pylib2/liblib.so
+  Reason: Incompatible library version: liblib.so requires version 2.0.0 or later, but liblib.1.0.0.dylib provides version 1.0.0
+
+-----------------------------------------
+name_match-compat_match-lib
+
+otool -L /tmp/test-delocate/lib/python2.7/site-packages/pylib/liblib.so
+	/tmp/test-delocate/lib/liblib.dylib (compatibility version 1.2.3, current version 1.0.0)
+otool -L /tmp/test-delocate/lib/python2.7/site-packages/pylib2/liblib.so
+	/tmp/test-delocate/lib/liblib.dylib (compatibility version 1.2.3, current version 2.0.0)
+import pylib....ok
+import pylib2...ok
+pylib.version  2
+pylib2.version 2
+static variables shared
+
+-----------------------------------------
+name_match-compat_match-delocate
+
+otool -L /tmp/test-delocate/lib/python2.7/site-packages/pylib/liblib.so
+	@loader_path/.dylibs/liblib.1.0.0.dylib (compatibility version 1.2.3, current version 1.0.0)
+otool -L /tmp/test-delocate/lib/python2.7/site-packages/pylib2/liblib.so
+	@loader_path/.dylibs/liblib.2.0.0.dylib (compatibility version 1.2.3, current version 2.0.0)
+import pylib....ok
+import pylib2...ok
+pylib.version  1
+pylib2.version 1
+static variables shared
+
+-----------------------------------------
+name_match-compat_match-delocate+lib
+
+otool -L /tmp/test-delocate/lib/python2.7/site-packages/pylib/liblib.so
+	@loader_path/.dylibs/liblib.1.0.0.dylib (compatibility version 1.2.3, current version 1.0.0)
+otool -L /tmp/test-delocate/lib/python2.7/site-packages/pylib2/liblib.so
+	/tmp/test-delocate/lib/liblib.dylib (compatibility version 1.2.3, current version 2.0.0)
+import pylib....ok
+import pylib2...ok
+pylib.version  1
+pylib2.version 1
+static variables shared
+
+-----------------------------------------
+name_differ-compat_differ-lib
+
+otool -L /tmp/test-delocate/lib/python2.7/site-packages/pylib/liblib.so
+	/tmp/test-delocate/lib/liblib.1.0.0.dylib (compatibility version 1.0.0, current version 1.0.0)
+otool -L /tmp/test-delocate/lib/python2.7/site-packages/pylib2/liblib.so
+	/tmp/test-delocate/lib/liblib.2.0.0.dylib (compatibility version 2.0.0, current version 2.0.0)
+import pylib....ok
+import pylib2...ok
+pylib.version  1
+pylib2.version 2
+static variables not shared
+
+-----------------------------------------
+name_differ-compat_differ-delocate
+
+otool -L /tmp/test-delocate/lib/python2.7/site-packages/pylib/liblib.so
+	@loader_path/.dylibs/liblib.1.0.0.dylib (compatibility version 1.0.0, current version 1.0.0)
+otool -L /tmp/test-delocate/lib/python2.7/site-packages/pylib2/liblib.so
+	@loader_path/.dylibs/liblib.2.0.0.dylib (compatibility version 2.0.0, current version 2.0.0)
+import pylib....ok
+import pylib2...ok
+pylib.version  1
+pylib2.version 2
+static variables not shared
+
+-----------------------------------------
+name_differ-compat_differ-delocate+lib
+
+otool -L /tmp/test-delocate/lib/python2.7/site-packages/pylib/liblib.so
+	@loader_path/.dylibs/liblib.1.0.0.dylib (compatibility version 1.0.0, current version 1.0.0)
+otool -L /tmp/test-delocate/lib/python2.7/site-packages/pylib2/liblib.so
+	/tmp/test-delocate/lib/liblib.2.0.0.dylib (compatibility version 2.0.0, current version 2.0.0)
+import pylib....ok
+import pylib2...ok
+pylib.version  1
+pylib2.version 2
+static variables not shared
+
+-----------------------------------------
+name_differ-compat_match-lib
+
+otool -L /tmp/test-delocate/lib/python2.7/site-packages/pylib/liblib.so
+	/tmp/test-delocate/lib/liblib.1.0.0.dylib (compatibility version 1.2.3, current version 1.0.0)
+otool -L /tmp/test-delocate/lib/python2.7/site-packages/pylib2/liblib.so
+	/tmp/test-delocate/lib/liblib.2.0.0.dylib (compatibility version 1.2.3, current version 2.0.0)
+import pylib....ok
+import pylib2...ok
+pylib.version  1
+pylib2.version 2
+static variables not shared
+
+-----------------------------------------
+name_differ-compat_match-delocate
+
+otool -L /tmp/test-delocate/lib/python2.7/site-packages/pylib/liblib.so
+	@loader_path/.dylibs/liblib.1.0.0.dylib (compatibility version 1.2.3, current version 1.0.0)
+otool -L /tmp/test-delocate/lib/python2.7/site-packages/pylib2/liblib.so
+	@loader_path/.dylibs/liblib.2.0.0.dylib (compatibility version 1.2.3, current version 2.0.0)
+import pylib....ok
+import pylib2...ok
+pylib.version  1
+pylib2.version 2
+static variables not shared
+
+-----------------------------------------
+name_differ-compat_match-delocate+lib
+
+otool -L /tmp/test-delocate/lib/python2.7/site-packages/pylib/liblib.so
+	@loader_path/.dylibs/liblib.1.0.0.dylib (compatibility version 1.2.3, current version 1.0.0)
+otool -L /tmp/test-delocate/lib/python2.7/site-packages/pylib2/liblib.so
+	/tmp/test-delocate/lib/liblib.2.0.0.dylib (compatibility version 1.2.3, current version 2.0.0)
+import pylib....ok
+import pylib2...ok
+pylib.version  1
+pylib2.version 2
+static variables not shared
