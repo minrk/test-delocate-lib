@@ -1,0 +1,10 @@
+*.pyc
+*.dylib
+*.o
+*.so
+*.pyo
+test
+pylib/*.c
+build
+dist
+*.egg-info
