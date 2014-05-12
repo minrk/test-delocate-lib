@@ -1,3 +1,16 @@
+# install liblib version 2:
+#
+#     V=2 make install
+#
+# use symlink (liblib.dylib) as install_name instead of full liblib.X.Y.Z.dylib:
+#
+#     INSTALL_NAME=symlink make
+#
+# specify explicit compatibility version:
+#
+#     COMPAT=1.2.3 make
+#
+
 ifndef CC
   CC=gcc
 endif

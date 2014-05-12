@@ -1,5 +1,11 @@
 """
-Run this
+setup for pylib (or pylib[N])
+
+run with:
+
+    V=2 python setup.py bdist_wheel
+
+to build pylib2
 """
 import glob
 import os

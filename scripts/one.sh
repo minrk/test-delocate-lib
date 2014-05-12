@@ -1,4 +1,8 @@
 #!/usr/bin/env bash
+#
+# do a single run
+# for use in all.sh
+#
 
 export PREFIX="$VIRTUAL_ENV"
 export CFLAGS="-I$PREFIX/include -L$PREFIX/lib"

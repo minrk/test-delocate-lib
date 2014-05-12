@@ -1,3 +1,8 @@
+"""
+summarize the state and relationship of pylib and pylib2
+
+for use in one.sh
+"""
 from __future__ import print_function
 import os
 import sys
